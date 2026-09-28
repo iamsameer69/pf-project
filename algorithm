@@ -1,0 +1,110 @@
+Algorithm:
+
+The steps below show how the base would work some admin features would be later added:
+
+Step 1: We start with 
+  1. Load all inventory records and ledger data from local files (.dat or .txt) into memory.
+  2. WHILE True:
+       DISPLAY Main Menu:
+         [1] Login as Admin
+         [2] Login as Pharmacist / Billing Operator
+         [3] Exit Program
+       READ choice
+       IF choice == 1:
+           CALL Admin_Module()
+       ELSE IF choice == 2:
+           CALL Billing_Module()
+       ELSE IF choice == 3:
+           Save all current memory data back to files.
+           PRINT "Exiting program. Goodbye!"
+           BREAK
+       ELSE:
+           PRINT "Invalid choice, try again."
+END
+
+
+Step 2: If admin is selected, then
+FUNCTION Admin_Module():
+  PRINT "Enter Admin Password: "
+  READ input_password
+  IF input_password != CORRECT_PASSWORD:
+      PRINT "Access Denied!"
+      RETURN
+  
+  WHILE True:
+       DISPLAY Admin Menu:
+         [1] Add New Medicine
+         [2] Update/Delete Medicine Record
+         [3] View Low-Stock & Expiry Alerts
+         [4] View Total Revenue & Sales Report
+         [5] Logout (Return to Main Menu)
+       READ admin_choice
+       
+       SWITCH admin_choice:
+           CASE 1: 
+               Prompt for medicine details (ID, name, price, qty, expiry).
+               Append new record to array/linked list and update file.
+           CASE 2:
+               Search medicine by ID/Name, modify fields, or mark as deleted.
+               Rewrite updated list to file.
+           CASE 3:
+               Scan inventory array for quantities < threshold OR expiry date <= current date.
+               Display warning alerts.
+           CASE 4:
+               Read sales/ledger file, calculate and display total revenue.
+           CASE 5:
+               BREAK (Logout)
+
+
+Step 3: if billing operator then 
+FUNCTION Billing_Module():
+  INITIALIZE cart (array of items with ID, quantity to buy)
+  INITIALIZE total_cost = 0
+
+  WHILE True:
+       DISPLAY Billing Menu:
+         [1] Search Medicine & Add to Cart
+         [2] View Cart & Total
+         [3] Checkout & Print Bill
+         [4] Cancel / Return to Main Menu
+       READ bill_choice
+
+       IF bill_choice == 1:
+           PRINT "Enter medicine name or ID to search:"
+           READ search_query
+           SEARCH inventory for search_query.
+           IF found:
+               DISPLAY medicine details & available stock.
+               PRINT "Enter quantity to buy:"
+               READ buy_qty
+               IF buy_qty <= available_stock:
+                   Add item to cart.
+                   UPDATE temporary total.
+               ELSE:
+                   PRINT "Error: Insufficient stock!"
+           ELSE:
+               PRINT "Medicine not found."
+
+       ELSE IF bill_choice == 2:
+           DISPLAY items currently in cart and running total.
+
+       ELSE IF bill_choice == 3:
+           IF cart is empty:
+               PRINT "Cart is empty!"
+               CONTINUE
+           
+           PRINT "Enter Customer Name & Phone Number:"
+           READ cust_name, cust_phone
+           
+           FOR each item in cart:
+               Subtract item.quantity from main inventory quantity.
+               Append transaction record to customer prescription ledger file.
+           
+           Generate formatted text receipt (console display + export to receipt.txt).
+           Save updated inventory back to data file.
+           CLEAR cart.
+           PRINT "Checkout successful!"
+
+       ELSE IF bill_choice == 4:
+           BREAK
+
