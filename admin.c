@@ -56,7 +56,5 @@ int Admin() {
         printf("\nAccess Granted! Welcome Admin.\n");
         fclose(admin); 
     }
-
-    printf("")
     return 0;    
 }
