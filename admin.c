@@ -72,29 +72,43 @@ int Admin() {
         printf("\nAccess Granted! Welcome Admin.\n");
         fclose(admin);
         
-        printf("\nEnter what you want to do\n1.Add New Medicine\n2.Update/Delete Medicine Record\n3.View Low-Stock & Expiry Alerts\n4.View Total Revenue & Sales Report\n5.Logout ");
-        scanf("%d",&feature);
+        FILE *pharmacy = fopen("pharmacy.txt", "r");
+        if (pharmacy == NULL) {
+            printf("Error creating file!\n");
+            return -1;
+        }
+
         while(feature < 5){
             printf("\nEnter what you want to do\n1.Add New Medicine\n2.Update/Delete Medicine Record\n3.View Low-Stock & Expiry Alerts\n4.View Total Revenue & Sales Report\n5.Logout ");
             scanf("%d",&feature);
             switch(feature){
                 case 1:{
+                    pharmacy = fopen("pharmacy.txt", "w");   
+                    fclose(pharmacy);
                     break;
                 }
                 case 2:{
+                    pharmacy = fopen("pharmacy.txt", "w");   
+                    fclose(pharmacy);
                     break;
                 }
                 case 3:{
+                    pharmacy = fopen("pharmacy.txt", "r");
+                    fclose(pharmacy);
                     break;
                 }
                 case 4:{
+                    
                     break;
                 }
                 default:{
                     break;
                 }
             }
+            
         }
+        
     }
+    
     return 0;    
 }
