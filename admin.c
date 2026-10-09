@@ -3,7 +3,9 @@
 int Admin() {
     int password1 = 0;
     int password2 = -1; 
-    
+    int password3 = 0;
+    int password4 = -1;
+    int feature = 0;
     FILE *admin = fopen("admin.txt", "r");
 
     if (admin == NULL) {
@@ -27,9 +29,23 @@ int Admin() {
                 printf("\nPasswords do not match! Please try again.\n");
             }
         }
+        while (password3 != password4)
+        {
+            printf("\nAlso Create Password Also for operator as well\n");
+            printf("\nEnter password (numbers only): ");
+            scanf("%d", &password3); 
+
+            printf("Confirm your password: ");
+            scanf("%d", &password4); 
+
+            if (password3 != password4) {
+                printf("\nPasswords do not match! Please try again.\n");
+            } 
+        }
+        
 
         // They match! Write to the file
-        fprintf(admin, "%d", password1);
+        fprintf(admin, "%d \n%d", password1,password3);
         printf("\nPassword Updated Successfully!\n");
         
         fclose(admin); 
@@ -54,7 +70,31 @@ int Admin() {
         }
 
         printf("\nAccess Granted! Welcome Admin.\n");
-        fclose(admin); 
+        fclose(admin);
+        
+        printf("\nEnter what you want to do\n1.Add New Medicine\n2.Update/Delete Medicine Record\n3.View Low-Stock & Expiry Alerts\n4.View Total Revenue & Sales Report\n5.Logout ");
+        scanf("%d",&feature);
+        while(feature < 5){
+            printf("\nEnter what you want to do\n1.Add New Medicine\n2.Update/Delete Medicine Record\n3.View Low-Stock & Expiry Alerts\n4.View Total Revenue & Sales Report\n5.Logout ");
+            scanf("%d",&feature);
+            switch(feature){
+                case 1:{
+                    break;
+                }
+                case 2:{
+                    break;
+                }
+                case 3:{
+                    break;
+                }
+                case 4:{
+                    break;
+                }
+                default:{
+                    break;
+                }
+            }
+        }
     }
     return 0;    
 }
