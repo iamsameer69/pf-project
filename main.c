@@ -29,14 +29,8 @@ int main() {
         printf("========================================\n");
         printf("Enter your Choice (1-3): ");
 
-        if (scanf("%d", &choice) != 1) {
-            printf("\n[!] Invalid input. Please enter a number.\n");
-            while (getchar() != '\n')
-                ; // Clear invalid input buffer
-            printf("Press Enter to continue...");
-            getchar();
-            continue;
-        }
+        scanf("%d", &choice);
+         
 
         if (choice == 1) {
             printf("\n[+] Loading Admin Module...\n");
